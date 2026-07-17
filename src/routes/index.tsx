@@ -31,7 +31,7 @@ function Home() {
             <Sparkles className="h-3.5 w-3.5 text-rose" />
             Wellness, quietly engineered
           </div>
-          <h1 className="animate-fade-up mt-6 text-balance font-serif text-5xl leading-[1.05] text-primary sm:text-6xl md:text-7xl">
+          <h1 className="animate-fade-up mt-6 text-balance font-serif text-4xl leading-[1.05] text-primary sm:text-5xl md:text-6xl">
             Targeted Relief for<br className="hidden sm:block" /> Modern Body Care
           </h1>
           <p className="animate-fade-up mx-auto mt-6 max-w-2xl text-balance text-base text-muted-foreground sm:text-lg" style={{ animationDelay: "120ms" }}>
