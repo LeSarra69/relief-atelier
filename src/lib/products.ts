@@ -60,7 +60,7 @@ export const products: Record<ProductSlug, Product> = {
       { label: "Heat range", value: "45°C – 60°C" },
       { label: "Battery", value: "2000 mAh · up to 8h" },
       { label: "Weight", value: "260 g" },
-      { label: "Waist size", value: "24" – 47"" },
+      { label: "Waist size", value: "24 in – 47 in" },
       { label: "Charging", value: "USB-C · 2h full charge" },
     ],
     shipping: [
@@ -114,7 +114,7 @@ export const products: Record<ProductSlug, Product> = {
     specs: [
       { label: "Heat range", value: "40°C – 55°C" },
       { label: "Battery", value: "2500 mAh · up to 4h" },
-      { label: "Fit", value: "12" – 22" circumference" },
+      { label: "Fit", value: "12 in – 22 in circumference" },
       { label: "Weight", value: "380 g" },
       { label: "Charging", value: "USB-C · 2.5h full charge" },
     ],
