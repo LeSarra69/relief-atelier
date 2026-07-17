@@ -10,10 +10,10 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import { products, type ProductSlug } from "@/lib/products";
+import { products, type Product, type ProductSlug } from "@/lib/products";
 
 export const Route = createFileRoute("/products/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { product: Product } => {
     const product = products[params.slug as ProductSlug];
     if (!product) throw notFound();
     return { product };
