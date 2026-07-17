@@ -41,7 +41,7 @@ export const Route = createFileRoute("/products/$slug")({
 });
 
 function PDP() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const [color, setColor] = useState(product.colors[0]);
   const [intensity, setIntensity] = useState(product.intensities[1] ?? product.intensities[0]);
   const [open, setOpen] = useState<string | null>("how");
