@@ -42,10 +42,10 @@ function Home() {
 
       {/* 3-Product Showcase */}
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6">
-        <div className="mb-10 flex items-end justify-between gap-6">
+        <div className="mb-6 flex items-end justify-between gap-6">
           <div>
-            <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">The Collection</div>
-            <h2 className="mt-2 font-serif text-3xl text-primary sm:text-4xl">Three rituals, expertly tuned</h2>
+            <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">The Collection</div>
+            <h2 className="mt-1 font-serif text-2xl text-primary sm:text-3xl">Three rituals, expertly tuned</h2>
           </div>
           <div className="hidden text-sm text-muted-foreground sm:block">
             Tap any card for a closer look
