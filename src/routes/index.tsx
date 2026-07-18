@@ -26,32 +26,17 @@ function Home() {
           <div className="absolute bottom-0 -right-24 h-80 w-80 rounded-full bg-cream/70 blur-3xl" />
         </div>
 
-        <div className="mx-auto max-w-6xl px-4 pb-20 pt-16 text-center sm:px-6 sm:pt-24">
-          <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-4 py-1.5 text-xs uppercase tracking-[0.22em] text-muted-foreground backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-rose" />
+        <div className="mx-auto max-w-6xl px-4 pb-6 pt-6 text-center sm:px-6 sm:pt-8">
+          <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-4 py-1 text-[10px] uppercase tracking-[0.22em] text-muted-foreground backdrop-blur">
+            <Sparkles className="h-3 w-3 text-rose" />
             Wellness, quietly engineered
           </div>
-          <h1 className="animate-fade-up mt-6 text-balance font-serif text-4xl leading-[1.05] text-primary sm:text-5xl md:text-6xl">
-            Targeted Relief for<br className="hidden sm:block" /> Modern Body Care
+          <h1 className="animate-fade-up mt-3 text-balance font-serif text-3xl leading-[1.05] text-primary sm:text-4xl md:text-5xl">
+            Targeted Body Relief
           </h1>
-          <p className="animate-fade-up mx-auto mt-6 max-w-2xl text-balance text-base text-muted-foreground sm:text-lg" style={{ animationDelay: "120ms" }}>
-            Innovative ergonomic technology engineered to restore comfort and body harmony — from period days to post-workout evenings.
+          <p className="animate-fade-up mx-auto mt-2 max-w-xl text-balance text-sm text-muted-foreground sm:text-base" style={{ animationDelay: "120ms" }}>
+            Choose your recovery tool below.
           </p>
-          <div className="animate-fade-up mt-9 flex flex-wrap justify-center gap-3" style={{ animationDelay: "220ms" }}>
-            <Link
-              to="/products"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground shadow-soft transition-all hover:scale-[1.03]"
-            >
-              Shop the Atelier
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              to="/science"
-              className="rounded-full border border-border bg-background/70 px-7 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-primary backdrop-blur transition-all hover:bg-background"
-            >
-              The Science
-            </Link>
-          </div>
         </div>
       </section>
 
