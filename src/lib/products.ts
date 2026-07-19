@@ -302,6 +302,8 @@ export const products: Record<ProductSlug, Product> = {
 
     slug: "neck",
 
+    shopifyHandle: "2026-new-electric-cordless-neck-massage-to-relieve-neck-and-shoulder-pain-deep-tissue-trigger-point-with-hot-kneading-massager",
+
     name: "Ciel Cervical Neck Massager",
 
     subtitle: "TENS micro-current + gentle thermal compress",
