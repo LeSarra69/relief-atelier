@@ -67,7 +67,11 @@ function PDP() {
     ? Math.max(0, Math.round(((parseFloat(shop.compareAtPrice.amount) - parseFloat(shop.price.amount)) / parseFloat(shop.compareAtPrice.amount)) * 100))
     : Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100);
 
-  const checkoutUrl = shop?.variantIdNumeric ? shopifyCheckoutUrl(shop.variantIdNumeric, 1) : null;
+  const handleAdd = () => {
+    cartStore.add(product.slug, 1);
+    setAdded(true);
+    setTimeout(() => navigate({ to: "/cart" }), 350);
+  };
 
   const reviews = [
     { name: "Amelia R.", text: "It's the first thing I reach for on day one. Silent, warm, and it actually works.", rating: 5 },
