@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Star,
@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import { products, type Product, type ProductSlug } from "@/lib/products";
 import { useQuery } from "@tanstack/react-query";
-import { getShopifyProduct, shopifyCheckoutUrl, formatMoney } from "@/lib/shopify";
+import { getShopifyProduct, formatMoney } from "@/lib/shopify";
+import { cartStore } from "@/lib/cart-store";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }): { product: Product } => {
