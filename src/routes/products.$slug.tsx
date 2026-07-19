@@ -142,19 +142,14 @@ function PDP() {
             </div>
 
             <div className="mt-7 rounded-3xl border border-border bg-card p-5 shadow-soft">
-              <a
-                href={checkoutUrl ?? "#"}
-                onClick={(e) => { if (!checkoutUrl) e.preventDefault(); }}
-                aria-disabled={!checkoutUrl}
-                className={`group flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-medium uppercase tracking-[0.22em] transition-all ${
-                  checkoutUrl
-                    ? "bg-primary text-primary-foreground hover:scale-[1.02]"
-                    : "bg-primary/40 text-primary-foreground/70 cursor-wait"
-                }`}
+              <button
+                type="button"
+                onClick={handleAdd}
+                className="group flex w-full items-center justify-center gap-2 rounded-full bg-primary py-4 text-sm font-medium uppercase tracking-[0.22em] text-primary-foreground transition-all hover:scale-[1.02]"
               >
-                {checkoutUrl ? `Add to Cart · ${displayPrice}` : "Loading…"}
+                {added ? "Added to cart ✓" : `Add to Cart · ${displayPrice}`}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
               <p className="mt-3 text-center text-xs text-muted-foreground">
                 Secure Shopify checkout · 30-Day Risk-Free Trial · Free Express Shipping
               </p>
