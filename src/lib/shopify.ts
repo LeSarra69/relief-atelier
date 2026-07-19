@@ -76,8 +76,10 @@ export async function getShopifyProduct(handle: string): Promise<ShopifyProduct 
 }
 
 // Direct-to-checkout permalink: fastest path from click to Shopify checkout.
+// Direct-to-checkout: path to Shopify checkout using query params
 export function shopifyCheckoutUrl(variantIdNumeric: string, quantity = 1): string {
-  return `https://${SHOPIFY_DOMAIN}/cart/${variantIdNumeric}:${quantity}`;
+  return `https://${SHOPSIFY_DOMAIN}/cart/add?id=${variantIdNumeric}&quantity=${quantity}`;
+}
 }
 
 export function formatMoney(amount: string | number, currency: string): string {
