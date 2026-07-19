@@ -14,6 +14,8 @@ export interface Product {
 
   slug: ProductSlug;
 
+  shopifyHandle: string;
+
   name: string;
 
   subtitle: string;
@@ -63,6 +65,8 @@ export const products: Record<ProductSlug, Product> = {
   menstrual: {
 
     slug: "menstrual",
+
+    shopifyHandle: "electronic-body-massager-menstrual-waist-belt-abdominal-vibration-massage-device-with-hot-compress-for-period-pain-relief",
 
     name: "Aura Menstrual Relief Belt",
 
@@ -177,6 +181,8 @@ export const products: Record<ProductSlug, Product> = {
   knee: {
 
     slug: "knee",
+
+    shopifyHandle: "2025-new-cordless-electric-knee-massager-3-vibrations-5-heating-levels-shoulder-elbow-thermal-massage-knee-support-brace-joint",
 
     name: "Halo Knee Recovery Wrap",
 
@@ -295,6 +301,8 @@ export const products: Record<ProductSlug, Product> = {
   neck: {
 
     slug: "neck",
+
+    shopifyHandle: "2026-new-electric-cordless-neck-massage-to-relieve-neck-and-shoulder-pain-deep-tissue-trigger-point-with-hot-kneading-massager",
 
     name: "Ciel Cervical Neck Massager",
 

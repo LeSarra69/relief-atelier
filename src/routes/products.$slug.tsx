@@ -11,6 +11,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { products, type Product, type ProductSlug } from "@/lib/products";
+import { useQuery } from "@tanstack/react-query";
+import { getShopifyProduct, shopifyCheckoutUrl, formatMoney } from "@/lib/shopify";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }): { product: Product } => {
@@ -46,7 +48,23 @@ function PDP() {
   const [intensity, setIntensity] = useState(product.intensities[1] ?? product.intensities[0]);
   const [open, setOpen] = useState<string | null>("how");
 
-  const save = Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100);
+  const { data: shop } = useQuery({
+    queryKey: ["shopify-product", product.shopifyHandle],
+    queryFn: () => getShopifyProduct(product.shopifyHandle),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const displayPrice = shop
+    ? formatMoney(shop.price.amount, shop.price.currencyCode)
+    : `$${product.price}`;
+  const displayCompare = shop?.compareAtPrice
+    ? formatMoney(shop.compareAtPrice.amount, shop.compareAtPrice.currencyCode)
+    : `$${product.comparePrice}`;
+  const save = shop?.compareAtPrice
+    ? Math.max(0, Math.round(((parseFloat(shop.compareAtPrice.amount) - parseFloat(shop.price.amount)) / parseFloat(shop.compareAtPrice.amount)) * 100))
+    : Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100);
+
+  const checkoutUrl = shop?.variantIdNumeric ? shopifyCheckoutUrl(shop.variantIdNumeric, 1) : null;
 
   const reviews = [
     { name: "Amelia R.", text: "It's the first thing I reach for on day one. Silent, warm, and it actually works.", rating: 5 },
@@ -90,11 +108,13 @@ function PDP() {
             <p className="mt-3 text-lg text-muted-foreground">{product.subtitle}</p>
 
             <div className="mt-6 flex items-center gap-3">
-              <span className="font-serif text-3xl text-primary">${product.price}</span>
-              <span className="text-lg text-muted-foreground line-through">${product.comparePrice}</span>
-              <span className="rounded-full bg-accent/50 px-3 py-1 text-xs font-medium uppercase tracking-widest text-primary">
-                Save {save}% today
-              </span>
+              <span className="font-serif text-3xl text-primary">{displayPrice}</span>
+              <span className="text-lg text-muted-foreground line-through">{displayCompare}</span>
+              {save > 0 && (
+                <span className="rounded-full bg-accent/50 px-3 py-1 text-xs font-medium uppercase tracking-widest text-primary">
+                  Save {save}% today
+                </span>
+              )}
             </div>
 
             <ul className="mt-6 grid gap-2.5">
@@ -115,12 +135,21 @@ function PDP() {
             </div>
 
             <div className="mt-7 rounded-3xl border border-border bg-card p-5 shadow-soft">
-              <button className="group flex w-full items-center justify-center gap-2 rounded-full bg-primary py-4 text-sm font-medium uppercase tracking-[0.22em] text-primary-foreground transition-all hover:scale-[1.02]">
-                Add to Cart · ${product.price}
+              <a
+                href={checkoutUrl ?? "#"}
+                onClick={(e) => { if (!checkoutUrl) e.preventDefault(); }}
+                aria-disabled={!checkoutUrl}
+                className={`group flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-medium uppercase tracking-[0.22em] transition-all ${
+                  checkoutUrl
+                    ? "bg-primary text-primary-foreground hover:scale-[1.02]"
+                    : "bg-primary/40 text-primary-foreground/70 cursor-wait"
+                }`}
+              >
+                {checkoutUrl ? `Add to Cart · ${displayPrice}` : "Loading…"}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
+              </a>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                30-Day Risk-Free Trial · Free Express Shipping
+                Secure Shopify checkout · 30-Day Risk-Free Trial · Free Express Shipping
               </p>
             </div>
 
