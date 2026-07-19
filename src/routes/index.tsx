@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Sparkles, Star, X } from "lucide-react";
 import { productList, type Product } from "@/lib/products";
+import { useShopifyPrice } from "@/hooks/use-shopify-price";
 
 export const Route = createFileRoute("/")({
   head: () => ({
