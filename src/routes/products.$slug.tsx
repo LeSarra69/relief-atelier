@@ -108,11 +108,13 @@ function PDP() {
             <p className="mt-3 text-lg text-muted-foreground">{product.subtitle}</p>
 
             <div className="mt-6 flex items-center gap-3">
-              <span className="font-serif text-3xl text-primary">${product.price}</span>
-              <span className="text-lg text-muted-foreground line-through">${product.comparePrice}</span>
-              <span className="rounded-full bg-accent/50 px-3 py-1 text-xs font-medium uppercase tracking-widest text-primary">
-                Save {save}% today
-              </span>
+              <span className="font-serif text-3xl text-primary">{displayPrice}</span>
+              <span className="text-lg text-muted-foreground line-through">{displayCompare}</span>
+              {save > 0 && (
+                <span className="rounded-full bg-accent/50 px-3 py-1 text-xs font-medium uppercase tracking-widest text-primary">
+                  Save {save}% today
+                </span>
+              )}
             </div>
 
             <ul className="mt-6 grid gap-2.5">
@@ -133,12 +135,21 @@ function PDP() {
             </div>
 
             <div className="mt-7 rounded-3xl border border-border bg-card p-5 shadow-soft">
-              <button className="group flex w-full items-center justify-center gap-2 rounded-full bg-primary py-4 text-sm font-medium uppercase tracking-[0.22em] text-primary-foreground transition-all hover:scale-[1.02]">
-                Add to Cart · ${product.price}
+              <a
+                href={checkoutUrl ?? "#"}
+                onClick={(e) => { if (!checkoutUrl) e.preventDefault(); }}
+                aria-disabled={!checkoutUrl}
+                className={`group flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-medium uppercase tracking-[0.22em] transition-all ${
+                  checkoutUrl
+                    ? "bg-primary text-primary-foreground hover:scale-[1.02]"
+                    : "bg-primary/40 text-primary-foreground/70 cursor-wait"
+                }`}
+              >
+                {checkoutUrl ? `Add to Cart · ${displayPrice}` : "Loading…"}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
+              </a>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                30-Day Risk-Free Trial · Free Express Shipping
+                Secure Shopify checkout · 30-Day Risk-Free Trial · Free Express Shipping
               </p>
             </div>
 
