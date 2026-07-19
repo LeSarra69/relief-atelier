@@ -14,6 +14,8 @@ export interface Product {
 
   slug: ProductSlug;
 
+  shopifyHandle: string;
+
   name: string;
 
   subtitle: string;
