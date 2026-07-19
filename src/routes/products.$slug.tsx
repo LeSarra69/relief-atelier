@@ -48,7 +48,23 @@ function PDP() {
   const [intensity, setIntensity] = useState(product.intensities[1] ?? product.intensities[0]);
   const [open, setOpen] = useState<string | null>("how");
 
-  const save = Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100);
+  const { data: shop } = useQuery({
+    queryKey: ["shopify-product", product.shopifyHandle],
+    queryFn: () => getShopifyProduct(product.shopifyHandle),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const displayPrice = shop
+    ? formatMoney(shop.price.amount, shop.price.currencyCode)
+    : `$${product.price}`;
+  const displayCompare = shop?.compareAtPrice
+    ? formatMoney(shop.compareAtPrice.amount, shop.compareAtPrice.currencyCode)
+    : `$${product.comparePrice}`;
+  const save = shop?.compareAtPrice
+    ? Math.max(0, Math.round(((parseFloat(shop.compareAtPrice.amount) - parseFloat(shop.price.amount)) / parseFloat(shop.compareAtPrice.amount)) * 100))
+    : Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100);
+
+  const checkoutUrl = shop?.variantIdNumeric ? shopifyCheckoutUrl(shop.variantIdNumeric, 1) : null;
 
   const reviews = [
     { name: "Amelia R.", text: "It's the first thing I reach for on day one. Silent, warm, and it actually works.", rating: 5 },
