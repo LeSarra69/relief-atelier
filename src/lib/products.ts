@@ -66,6 +66,8 @@ export const products: Record<ProductSlug, Product> = {
 
     slug: "menstrual",
 
+    shopifyHandle: "electronic-body-massager-menstrual-waist-belt-abdominal-vibration-massage-device-with-hot-compress-for-period-pain-relief",
+
     name: "Aura Menstrual Relief Belt",
 
     subtitle: "Warming vibration therapy for cramp-free days",
