@@ -110,6 +110,7 @@ function ProductCard({
   featured?: boolean;
   delay: number;
 }) {
+  const shop = useShopifyPrice(product.shopifyHandle);
   return (
     <button
       onClick={onClick}
@@ -141,8 +142,10 @@ function ProductCard({
         <h3 className="mt-2 font-serif text-2xl text-primary">{product.name}</h3>
         <div className="mt-3 flex items-center justify-between">
           <span className="text-sm text-primary">
-            <span className="font-medium">${product.price}</span>
-            <span className="ml-2 text-muted-foreground line-through">${product.comparePrice}</span>
+            <span className="font-medium">{shop?.price ?? `$${product.price}`}</span>
+            {shop?.compareAt && (
+              <span className="ml-2 text-muted-foreground line-through">{shop.compareAt}</span>
+            )}
           </span>
           <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
             <Star className="h-3.5 w-3.5 fill-rose text-rose" />
