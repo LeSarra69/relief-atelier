@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Star,
@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import { products, type Product, type ProductSlug } from "@/lib/products";
 import { useQuery } from "@tanstack/react-query";
-import { getShopifyProduct, shopifyCheckoutUrl, formatMoney } from "@/lib/shopify";
+import { getShopifyProduct, formatMoney } from "@/lib/shopify";
+import { cartStore } from "@/lib/cart-store";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }): { product: Product } => {
@@ -44,6 +45,8 @@ export const Route = createFileRoute("/products/$slug")({
 
 function PDP() {
   const { product } = Route.useLoaderData() as { product: Product };
+  const navigate = useNavigate();
+  const [added, setAdded] = useState(false);
   const [color, setColor] = useState(product.colors[0]);
   const [intensity, setIntensity] = useState(product.intensities[1] ?? product.intensities[0]);
   const [open, setOpen] = useState<string | null>("how");
@@ -64,7 +67,11 @@ function PDP() {
     ? Math.max(0, Math.round(((parseFloat(shop.compareAtPrice.amount) - parseFloat(shop.price.amount)) / parseFloat(shop.compareAtPrice.amount)) * 100))
     : Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100);
 
-  const checkoutUrl = shop?.variantIdNumeric ? shopifyCheckoutUrl(shop.variantIdNumeric, 1) : null;
+  const handleAdd = () => {
+    cartStore.add(product.slug, 1);
+    setAdded(true);
+    setTimeout(() => navigate({ to: "/cart" }), 350);
+  };
 
   const reviews = [
     { name: "Amelia R.", text: "It's the first thing I reach for on day one. Silent, warm, and it actually works.", rating: 5 },
@@ -135,19 +142,14 @@ function PDP() {
             </div>
 
             <div className="mt-7 rounded-3xl border border-border bg-card p-5 shadow-soft">
-              <a
-                href={checkoutUrl ?? "#"}
-                onClick={(e) => { if (!checkoutUrl) e.preventDefault(); }}
-                aria-disabled={!checkoutUrl}
-                className={`group flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-medium uppercase tracking-[0.22em] transition-all ${
-                  checkoutUrl
-                    ? "bg-primary text-primary-foreground hover:scale-[1.02]"
-                    : "bg-primary/40 text-primary-foreground/70 cursor-wait"
-                }`}
+              <button
+                type="button"
+                onClick={handleAdd}
+                className="group flex w-full items-center justify-center gap-2 rounded-full bg-primary py-4 text-sm font-medium uppercase tracking-[0.22em] text-primary-foreground transition-all hover:scale-[1.02]"
               >
-                {checkoutUrl ? `Add to Cart · ${displayPrice}` : "Loading…"}
+                {added ? "Added to cart ✓" : `Add to Cart · ${displayPrice}`}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
               <p className="mt-3 text-center text-xs text-muted-foreground">
                 Secure Shopify checkout · 30-Day Risk-Free Trial · Free Express Shipping
               </p>
