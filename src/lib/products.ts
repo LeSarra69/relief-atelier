@@ -182,6 +182,8 @@ export const products: Record<ProductSlug, Product> = {
 
     slug: "knee",
 
+    shopifyHandle: "2025-new-cordless-electric-knee-massager-3-vibrations-5-heating-levels-shoulder-elbow-thermal-massage-knee-support-brace-joint",
+
     name: "Halo Knee Recovery Wrap",
 
     subtitle: "Infrared heat + air compression for joint relief",
