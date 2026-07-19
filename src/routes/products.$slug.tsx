@@ -11,6 +11,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { products, type Product, type ProductSlug } from "@/lib/products";
+import { useQuery } from "@tanstack/react-query";
+import { getShopifyProduct, shopifyCheckoutUrl, formatMoney } from "@/lib/shopify";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }): { product: Product } => {
